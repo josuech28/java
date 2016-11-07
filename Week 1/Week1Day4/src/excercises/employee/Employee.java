@@ -21,6 +21,11 @@ public  class Employee {
         this.name = name;
         this.salary = salary;
     }
+    public Employee(int employeeId){
+        this.employeeId = employeeId;
+        this.name = "";
+        this.salary = new BigDecimal("0");;
+    }
     public int getEmployeeId() {
         return employeeId;
     }
@@ -49,6 +54,14 @@ public  class Employee {
         } catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    public BigDecimal increaseSalary(BigDecimal porcent){
+        BigDecimal oneHundred = new BigDecimal("100");
+        BigDecimal increment = porcent.divide(oneHundred);
+        BigDecimal bg = this.getSalary().multiply(increment) ;
+        this.setSalary(this.getSalary().add(bg));
+        return this.getSalary();
     }
 
     @Override
