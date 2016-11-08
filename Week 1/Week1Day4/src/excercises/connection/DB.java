@@ -13,7 +13,6 @@ public class DB {
     private final String password = "jCHINCHILLA7";
     Connection connection = null;
 
-
     public DB(){
         try {
             connect();
@@ -30,6 +29,10 @@ public class DB {
         } catch (Exception e) {
             System.out.println(e);
         }
+        return connection;
+    }
+
+    public Connection getConnection() {
         return connection;
     }
 

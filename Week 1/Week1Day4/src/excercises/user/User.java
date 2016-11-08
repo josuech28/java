@@ -5,14 +5,16 @@ package excercises.user;
  */
 public class User {
 
-
-
     private String name;
     private final int id;
-    private int password;
+    private String password;
 
-    public User(String name, int id, int password) {
+    public User(int id,String name, String password) {
         this.name = name;
+        this.id = id;
+        this.password = password;
+    }
+    public User(int id , String password) {
         this.id = id;
         this.password = password;
     }
@@ -20,7 +22,7 @@ public class User {
     public User() {
         this.name = "";
         this.id = 0;
-        this.password = 0;
+        this.password = "";
     }
 
     public String getName() {
@@ -31,9 +33,14 @@ public class User {
         return id;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     @Override
     public String toString() {

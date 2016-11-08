@@ -1,5 +1,6 @@
 package excercises.department;
 
+import excercises.connection.DB;
 import excercises.employee.Employee;
 
 import java.sql.Connection;
@@ -12,27 +13,17 @@ import java.sql.SQLException;
  */
 public class DepartmentDAO {
 
-    private final String url = "jdbc:postgresql://localhost/Week1Day4";
-    private  final String user = "postgres";
-    private final String password = "jCHINCHILLA7";
-    Connection connection = null;
+    private DB db;
 
-    public Connection connect() throws SQLException {
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(url,user,password);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return connection;
+    public DepartmentDAO(){
+        this.db = new DB();
     }
 
     public void addDepartment(Department department){
         String query = "insert into \"Department\" values(?,?,?)";
         try {
             for(Employee e: department.getEmployees()){
-                PreparedStatement pst = connection.prepareStatement(query);
+                PreparedStatement pst = db.getConnection().prepareStatement(query);
                 pst.setInt(1,department.getIdDepartement());
                 pst.setInt(2,e.getEmployeeId());
                 pst.setString(3,department.getName());

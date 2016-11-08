@@ -1,15 +1,21 @@
+import excercises.Investment.Investment;
+import excercises.Investment.InvestmentDao;
 import excercises.autoboxing.Number;
 import excercises.autoboxing.NumberTest;
 import excercises.circle.Circle;
+import excercises.connection.DB;
 import excercises.department.Department;
 import excercises.department.DepartmentDAO;
 import excercises.employee.Employee;
 import excercises.employee.EmployeeDAO;
 import excercises.employee.EmployeeTest;
+import excercises.user.User;
+import excercises.user.UserDao;
 import excercises.varargs.HardCoded;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /**
  * Created by joschinc on 11/4/16.
@@ -93,12 +99,7 @@ public class Week1Day4 {
 
         EmployeeDAO dao = new EmployeeDAO();
         DepartmentDAO daoDepartment = new DepartmentDAO();
-        try {
-            dao.connect();
-            daoDepartment.connect();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         //dao.addEmployee(e1);
         //dao.addEmployee(e2);
         //dao.addEmployee(e3);
@@ -178,10 +179,68 @@ public class Week1Day4 {
 
         daoDepartment.addDepartment(studio);
 
-        dao.closeConnection();
          */
+        /*
+            User - Investments
+         */
+        DB db = new DB();
+        try {
+            db.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        User u1 = new User(1,"Josue","j12345");
+        User u2 = new User(2,"Shashank","s12345");
+        User u3 = new User(3,"Leonardo","l12345");
 
+
+
+
+        UserDao daoUser = new UserDao();
+        daoUser.addUser(u1);
+        daoUser.addUser(u2);
+        daoUser.addUser(u3);
+        daoUser.findUser(1,"j12346");
+
+        Investment i1 = new Investment(1,"GOOGLE",1340, new BigDecimal("1200"),1);
+        Investment i2 = new Investment(2,"FACEBOOK",1341, new BigDecimal("3200"),1);
+        Investment i3 = new Investment(3,"TESLA MOTORS",1343, new BigDecimal("1400"),1);
+        Investment i4 = new Investment(4,"GOOGLE",1343, new BigDecimal("200"),1);
+        Investment i5 = new Investment(5,"GOOGLE",1344, new BigDecimal("12000"),1);
+
+        InvestmentDao daoInvestment = new InvestmentDao();
+        daoInvestment.addInvestment(i1);
+        daoInvestment.addInvestment(i2);
+        daoInvestment.addInvestment(i3);
+        daoInvestment.addInvestment(i4);
+        daoInvestment.addInvestment(i5);
+
+        daoInvestment.getInvestmentByUser(u1);
+        //daoUser.deleteUser(u1);
+        /* With Scanner
+
+        Scanner in = new Scanner(System.in);
+        int id = 0;
+        String password = "";
+        System.out.println("Digit ID User please");
+        id = in.nextInt();
+        System.out.println("Digit your password");
+        password = in.next();
+        if(daoUser.findUser(id,password).equals(null)){
+            System.out.println("User not found or password dont match");
+        } else {
+            User temp = new User();
+            temp = daoUser.findUser(id,password);
+            daoInvestment.getInvestmentByUser(temp);
+        }
+
+
+
+         */
+        db.closeConnection();
     }
+
+
 
 
 }
