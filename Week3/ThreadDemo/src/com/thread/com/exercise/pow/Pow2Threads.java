@@ -5,43 +5,65 @@ package com.thread.com.exercise.pow;
  */
 public class Pow2Threads {
 
-    private static double sum = 0;
+   private static double result = 0;
+    private static Object lock = new Object();
 
-    public static synchronized double pow(int number) {
-        return Math.pow(number, 2);
+    public static int pow(int number) {
+        return (int) Math.pow(number, 2);
     }
 
-    public static synchronized void sumPow(int n) {
-        for (int i = 1; i <= n; i++) {
-            sum += pow(i);
+    public static int sumPow(int[] n) {
+        int sum = 0;
+        for (int i = 0; i < n.length; i++) {
+            sum += n[i];
         }
+        return sum;
     }
 
     public static void main(String[] args){
+        final int n = 5;
+        final int[] arr = new int[n];
+
         Thread t1 = new Thread(new Runnable() {
             // Not necessary this first thread, just for test;
             @Override
             public void run() {
-                pow(2);
+                synchronized (lock) {
+                    for (int i = 0; i < n; i++) {
+                        arr[i] = pow(i+1);
+                    }
+                    lock.notify();
+                }
             }
         });
 
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                sumPow(5);
+                synchronized (lock) {
+
+                        result = sumPow(arr);
+
+                }
             }
         });
 
-        t1.start();
-        t2.start();
-
         try {
+
+            t1.start();
+            t2.start();
             t1.join();
+
             t2.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Value: " + sum);
+        System.out.println("Value: " + result);
     }
 }
+// synchronized - wait notify and notifyAll
+// join - sleep
+// yield
+// priority 1 - 10
+//life cycle of thread - start - runnable- running - halt/wait -
+// best way to stop a thread. - we shouldn't be using the stop method .. Interrupt
