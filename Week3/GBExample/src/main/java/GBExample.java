@@ -12,9 +12,10 @@ public class GBExample {
         //Option One to call finalize
         //employee = new Employee();
 
-        // Option Two to call finalize
+        // Option Two to call finalize put the instance in null value
         //employee = null;
 
+        // Option 3 reference
         Employee e2 = new Employee();
         e2 = employee;
         System.gc();

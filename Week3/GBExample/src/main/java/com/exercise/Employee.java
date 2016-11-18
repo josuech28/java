@@ -19,7 +19,6 @@ public final class Employee {
         addReports();
     }
     public Employee(){
-
     }
 
     private void addReports(){
