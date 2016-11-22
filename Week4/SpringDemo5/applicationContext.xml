@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="playerBean" class="com.test.Player">
+        <constructor-arg value="Cristiano Ronaldo"></constructor-arg>
+        <constructor-arg value="Forward"></constructor-arg>
+    </bean>
+
+    <!-- Bean team => player -->
+    <bean id="teamBean" class="com.test.playerteam.Team">
+        <constructor-arg value="Real Madrid"></constructor-arg>
+        <constructor-arg value="Espana"></constructor-arg>
+    </bean>
+    <bean id="playerSoccerBean" class="com.test.playerteam.PlayerSoccer">
+        <constructor-arg value="Cristiano Ronaldo"></constructor-arg>
+        <constructor-arg value="Forward"></constructor-arg>
+        <constructor-arg>
+            <ref bean="teamBean"></ref>
+        </constructor-arg>
+    </bean>
+    <!-- Collectios woth String and primitives -->
+    <!-- List -->
+    <bean id="questionBean" class="com.test.constructor.collection.Question">
+        <constructor-arg value="1" type="int"></constructor-arg>
+        <constructor-arg value="How win the next Champions League"></constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>Real Madird</value>
+                <value>Manchester City</value>
+                <value>Bayern Munich</value>
+            </list>
+        </constructor-arg>
+    </bean>
+    <!-- Map -->
+    <bean id="questionMapBean" class="com.test.constructor.collection.hashmap.QuestionHashMap">
+        <constructor-arg value="2" type="int"></constructor-arg>
+        <constructor-arg value="Who win the best player of the year?"></constructor-arg>
+        <constructor-arg>
+            <map>
+                <entry key="1" value="Criatiano Ronaldo"></entry>
+                <entry key="2" value="Leonel Messi"></entry>
+                <entry key="3" value="Josue Chinchilla"></entry>
+            </map>
+        </constructor-arg>
+    </bean>
+    <!-- List of Objects -->
+    <bean id="answer1Bean" class="com.test.constructor.collection.object.list.list.Answer">
+        <constructor-arg value="1" type="int"></constructor-arg>
+        <constructor-arg value="Josue Chinchilla"></constructor-arg>
+        <constructor-arg value="josuech28"></constructor-arg>
+    </bean>
+    <bean id="answer2Bean" class="com.test.constructor.collection.object.list.list.Answer">
+        <constructor-arg value="2" type="int"></constructor-arg>
+        <constructor-arg value="Leonardo Vargas"></constructor-arg>
+        <constructor-arg value="Leo2341"></constructor-arg>
+    </bean>
+    <bean id="answer3Bean" class="com.test.constructor.collection.object.list.list.Answer">
+        <constructor-arg value="3" type="int"></constructor-arg>
+        <constructor-arg value="Israel Mata"></constructor-arg>
+        <constructor-arg value="mata32"></constructor-arg>
+    </bean>
+    <bean id="questionObjectListBean" class="com.test.constructor.collection.object.list.list.QuestionObjectList">
+        <constructor-arg value="1" type="int"></constructor-arg>
+        <constructor-arg value="Who will win next round?"></constructor-arg>
+        <constructor-arg>
+            <list>
+                <ref bean="answer1Bean"></ref>
+                <ref bean="answer2Bean"></ref>
+                <ref bean="answer3Bean"></ref>
+            </list>
+        </constructor-arg>
+    </bean>
+    <!-- Objects with hash -->
+    <bean id="user1Bean" class="com.test.constructor.collection.object.list.hashmap.User">
+        <constructor-arg value="Josue Chinchilla"></constructor-arg>
+    </bean>
+    <bean id="user2Bean" class="com.test.constructor.collection.object.list.hashmap.User">
+        <constructor-arg value="Israel Mata"></constructor-arg>
+    </bean>
+    <bean id="user3Bean" class="com.test.constructor.collection.object.list.hashmap.User">
+        <constructor-arg value="Leonar V"></constructor-arg>
+    </bean>
+    <!-- INHERET -->
+    <bean id="questionObjectMapFather" class="com.test.constructor.collection.object.list.hashmap.QuestionObjectMap">
+        <constructor-arg value="1" type="int"></constructor-arg>
+        <constructor-arg value="Where is Pizza Hut?"></constructor-arg>
+    </bean>
+    <bean id="questionObjectMap" class="com.test.constructor.collection.object.list.hashmap.QuestionObjectMap" parent="questionObjectMapFather">
+        <constructor-arg>
+            <map>
+                <entry key-ref="answer1Bean" value-ref="user1Bean"></entry>
+                <entry key-ref="answer2Bean" value-ref="user2Bean"></entry>
+                <entry key-ref="answer3Bean" value-ref="user3Bean"></entry>
+            </map>
+        </constructor-arg>
+    </bean>
+    <!-- Use propperties -->
+    <bean id="carHondaBean" class="com.test.bysetter.Car">
+        <property name="brand" value="Honda"></property>
+        <property name="year" value="2001"></property>
+        <property name="doors" value="2"></property>
+    </bean>
+    <bean id="carToyotaBean" class="com.test.bysetter.Car">
+        <property name="brand" value="Toyota"></property>
+        <property name="year" value="2010"></property>
+        <property name="doors" value="4"></property>
+    </bean>
+    <bean id="carMercedesBean" class="com.test.bysetter.Car">
+        <property name="brand" value="Mercedes Benz"></property>
+        <property name="year" value="2017"></property>
+        <property name="doors" value="4"></property>
+    </bean>
+    <bean id="personBean" class="com.test.bysetter.Person">
+        <property name="name" value="Josue Chinchilla Hidalgo"></property>
+        <property name="car">
+            <map>
+                <entry key="1" value-ref="carHondaBean"></entry>
+                <entry key="2" value-ref="carToyotaBean"></entry>
+                <entry key="3" value-ref="carMercedesBean"></entry>
+            </map>
+        </property>
+    </bean>
+    <!-- Singleton -->
+    <bean id="singletonDogBean" scope="singleton" class="com.test.singleton.Dog">
+    </bean>
+
+    <!-- Prototype -->
+    <bean id="prototypeCatBean" scope="prototype" class="com.test.prototype.Cat">
+
+    </bean>
+
+</beans>
