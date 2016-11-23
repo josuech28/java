@@ -43,6 +43,9 @@ public class PortafolioTester {
         when(stockService.getPrice(microsoftStock)).thenReturn(new BigDecimal("1000.00"));
 
         BigDecimal marketValue = portfolio.getMarketValue();
-        return marketValue == new BigDecimal("100500.0");
+        System.out.println(marketValue);
+        BigDecimal temp = new BigDecimal("100500.0");
+        System.out.println(temp);
+        return marketValue.equals(new BigDecimal("100500.00"));
     }
 }
