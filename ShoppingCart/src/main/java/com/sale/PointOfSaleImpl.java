@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by joschinc on 12/6/16.
+ * Created by joschinc on 12/5/16.
  */
 
 public class PointOfSaleImpl implements PointOfSale {

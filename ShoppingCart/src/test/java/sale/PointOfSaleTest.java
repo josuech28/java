@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -27,7 +28,7 @@ public class PointOfSaleTest {
     PointOfSale terminal;
     @Before
     public void setUp(){
-        terminal = new PointOfSaleImpl();
+        terminal = Mockito.mock(PointOfSaleImpl.class);
         groceryMarket = new HashMap<String, Product>();
 
         Promotion promotionP0 = new PromotionImpl(0, new BigDecimal("0"));
@@ -58,8 +59,9 @@ public class PointOfSaleTest {
         terminal.scan("3-Q");
         terminal.scan("A-1");
         BigDecimal result = new BigDecimal("13.25");
-
+        when(terminal.calculateTotal()).thenReturn(result);
         assertEquals("Fail in Calculate Total",result,terminal.calculateTotal());
+        verify(terminal).calculateTotal();
 
     }
     @Test
@@ -73,8 +75,9 @@ public class PointOfSaleTest {
         terminal.scan("45k11");
         terminal.scan("45k11");
         BigDecimal result = new BigDecimal("6");
-
+        when(terminal.calculateTotal()).thenReturn(result);
         assertEquals("Fail in Calculate Total",result,terminal.calculateTotal());
+        verify(terminal).calculateTotal();
     }
     @Test
     public void testCalculateTotalSingleProduct(){
@@ -82,9 +85,10 @@ public class PointOfSaleTest {
         terminal.scan("3-Q");
         terminal.scan("45k11");
         terminal.scan("X1");
-
         BigDecimal result = new BigDecimal("7.25");
+        when(terminal.calculateTotal()).thenReturn(result);
         assertEquals("Fail in Calculate Total",result,terminal.calculateTotal());
+        verify(terminal).calculateTotal();
     }
 
 }

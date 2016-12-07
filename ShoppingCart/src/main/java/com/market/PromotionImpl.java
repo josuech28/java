@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Created by joschinc on 12/5/16.
  */
-public class PromotionImpl implements Promotion {
+public final class PromotionImpl implements Promotion {
 
     private final int numberItem;
     private final BigDecimal price;
