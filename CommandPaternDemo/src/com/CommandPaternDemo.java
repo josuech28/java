@@ -3,11 +3,16 @@ package com;
 import com.broker.Broker;
 import com.broker.BrokerApplyOrder;
 import com.broker.BrokerTakeOrder;
+import com.execute.Execute;
+import com.order.Order;
 import com.stock.BuyStock;
 import com.stock.SellStock;
 import com.stock.Stock;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by joschinc on 12/12/16.
@@ -17,18 +22,23 @@ public class CommandPaternDemo {
         String name = "GOOGL";
         BigDecimal quantity = new BigDecimal("70.00");
 
-        Stock stock = new Stock(name,quantity);
-        BuyStock buyStock = new BuyStock(stock);
-        SellStock sellStock = new SellStock(stock);
-
         Broker broker = new Broker();
-        BrokerTakeOrder takeOrderBuy = new BrokerTakeOrder(broker,buyStock);
-        BrokerTakeOrder takeOrderSell = new BrokerTakeOrder(broker,sellStock);
-        BrokerApplyOrder applyOrder = new BrokerApplyOrder(broker);
-        
-        takeOrderBuy.execute();
-        takeOrderSell.execute();
-        applyOrder.execute();
+        Stock stock = new Stock(name,quantity);
 
+        Order buyStock = new BuyStock(stock);
+        Order sellStock = new SellStock(stock);
+
+        Order takeOrderBuy = new BrokerTakeOrder(broker,buyStock);
+        Order takeOrderSell = new BrokerTakeOrder(broker,sellStock);
+        Order applyOrder = new BrokerApplyOrder(broker);
+
+        List<Order> orderList = new ArrayList<Order>();
+
+        orderList.add(takeOrderBuy);
+        orderList.add(takeOrderSell);
+        orderList.add(applyOrder);
+
+        Execute execute = new Execute(orderList);
+        execute.execute();
     }
 }
