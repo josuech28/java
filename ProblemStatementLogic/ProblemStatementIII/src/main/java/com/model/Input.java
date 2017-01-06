@@ -1,34 +1,25 @@
 package com.model;
 
 /**
- *
- * @author Josue Chinchilla Hidalgo
- * Class to stock state of the input(input)
+ * Created by joschinc on 1/4/17.
  */
-public class Input {
+public final class Input {
+    private final String word;
 
-    //Constructors
-    public Input(Object barter) {
-        this.permute = barter;
+    public Input(String word) {
+        this.word = word;
         
     }
-    public Input(){
-        permute = null;
-    }
-    //Getter and Setter
-    public Object getPermute() {
-        return permute;
+
+    public String getWord() {
+        return word;
     }
 
-    public void setPermute(Object permute) {
-        this.permute = permute;
-    }
-    
-    //ToString of Input
+
     @Override
     public String toString() {
-        return "Input{" + "barter=" + permute + '}';
+        return "Input{" + "word=" + word + '}';
     }
    
-    private Object permute;
+
 }

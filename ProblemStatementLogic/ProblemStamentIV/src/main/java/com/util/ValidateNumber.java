@@ -9,7 +9,7 @@ public class ValidateNumber {
             Integer.parseInt(chain);
             return true;
         } catch (NumberFormatException numberException){
-            numberException.printStackTrace();
+            System.out.println(numberException.toString());
             return false;
         }
     }

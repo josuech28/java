@@ -10,107 +10,61 @@ import java.util.List;
 
 import com.model.Input;
 import com.model.Logic;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author Personal
+ * Created by joschinc on 1/4/17.
  */
 public class LogicTest {
-    
-    public LogicTest() {
-    }
-    
+
     @BeforeClass
     public static void setUpClass() {
+        instance = new Logic();
     }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+
 
     /**
      * Test of permutation method, of class Logic.
      */
     @Test
-    public void testPermutation() {
+    public void PermutationTest() {
         System.out.println("permutation");
         String prefix = "";
-        String in = "cat";
-        Input input = new Input();
-        input.setPermute(in);
-        Logic instance = new Logic();
-        List<String> expResult = Arrays.asList("cat","cta","atc","act","tca","tac");
+        String in = "123";
+        Input input = new Input(in);
+        List<String> expResult = Arrays.asList("123","132","213","231","312","321");
         List<String> result = instance.permutation(prefix, input);
+        instance.sort(result);
         assertEquals(expResult, result);
-        if (!result.equals(expResult)) {
-            fail("The test case is a prototype.");
-        }
     }
 
     /**
      * Test of sort method, of class Logic.
      */
     @Test
-    public void testSort() {
+    public void SortTest() {
         System.out.println("sort");
-        List<String> array = Arrays.asList("c", "a", "t");
-        Logic instance = new Logic();
+        List<String> array = Arrays.asList("3", "2", "1");
+        List<String> expResult = Arrays.asList("1","2","3");
         instance.sort(array);
-    }
-
-    /**
-     * Test of assignArray method, of class Logic.
-     */
-    @Test
-    public void testAssignArray() {
-        System.out.println("assignArray");
-        String[] list_permutation = {"c","a","t"};
-        List<String> permutation = Arrays.asList("c", "a", "t");;
-        Logic instance = new Logic();
-        instance.assignArray(list_permutation, permutation);
-
-    }
-
-    /**
-     * Test of printArray method, of class Logic.
-     */
-    @Test
-    public void testPrintArray() {
-        System.out.println("printArray");
-        String[] list_permutation = {"c","a","t"};
-        Logic instance = new Logic();
-        instance.printArray(list_permutation);
-
+        assertEquals(expResult,array);
     }
 
     /**
      * Test of arraySize method, of class Logic.
      */
     @Test
-    public void testArraySize() {
+    public void ArraySizeTest() {
         System.out.println("arraySize");
-        String[] string = {"c","a","t"};
-        Logic instance = new Logic();
+        String[] string = {"1","2","3"};
+
         int expResult = 3;
         int result = instance.arraySize(string);
         assertEquals(expResult, result);
-        if (result !=expResult ) {
-            fail("The test case is a prototype.");
-        }
     }
+
+    private static Logic instance;
     
 }
